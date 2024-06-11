@@ -1,0 +1,28 @@
+import numpy as np
+# region imports
+from AlgorithmImports import *
+# endregion
+
+class CalmRedSardine(QCAlgorithm):
+
+    def initialize(self):
+        self.set_cash(100000)
+
+        self.SetStartDate(2021,6,4)
+        self.SetEndDate(2024,6,4)
+
+        self.symbol = self.AddEquity("NVDA", Resolution.Daily).Symbol
+
+        self.lookback = 20 //#of days one needs to lookback to determine breakout point
+        
+
+        self.ceiling, self.floor = 30, 10
+
+
+
+
+    def on_data(self, data: Slice):
+        if not self.portfolio.invested:
+            self.set_holdings("SPY", 0.33)
+            self.set_holdings("BND", 0.33)
+            self.set_holdings("AAPL", 0.33)
